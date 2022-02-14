@@ -1,21 +1,17 @@
 <template>
   <div class="v-table">
-    <div class="v-table__header">
-      <p @click="sortByName">
+    <div class="v-table__header grid grid-cols-4 border-b-2 mb-4 pb-2">
+      <p class="flex flex-row items-center cursor-pointer px-2 transition duration-300 hover:text-indigo-500" @click="sortByName">
         Имя
-        <img src="@/assets/unfold_more.svg" alt="more">
       </p>
-      <p @click="sortByUsername">
+      <p class="flex flex-row items-center cursor-pointer px-2 transition duration-300 hover:text-indigo-500" @click="sortByUsername">
         Никнейм
-        <img src="@/assets/unfold_more.svg" alt="more">
       </p>
-      <p @click="sortByEmail">
+      <p class="flex flex-row items-center cursor-pointer px-2 transition duration-300 hover:text-indigo-500" @click="sortByEmail">
         Email
-        <img src="@/assets/unfold_more.svg" alt="more">
       </p>
-      <p @click="sortByPhone">
+      <p class="flex flex-row items-center cursor-pointer px-2 transition duration-300 hover:text-indigo-500" @click="sortByPhone">
         Номер телефона
-        <img src="@/assets/unfold_more.svg" alt="more">
       </p>
     </div>
     <div class="v-table__body">
@@ -25,12 +21,12 @@
         :row-data="row"
       />
     </div>
-    <div class="v-table__pagination">
+    <div class="v-table__pagination flex flex-row justify-center mt-4">
       <div
-          class="page"
+          class="page p-2 mx-1 cursor-pointer border rounded transition duration-300 hover:bg-indigo-500 hover:text-white"
           v-for="page in pages"
           :key="page"
-          :class="{'page-selected': page === pageNumber}"
+          :class="{'bg-indigo-300 text-white': page === pageNumber}"
           @click="pageClick(page)"
       >
         {{ page }}
@@ -92,36 +88,17 @@ export default {
 
 <style scoped>
 .v-table {
-  max-width: 900px;
-  margin: 0 auto;
 }
 .v-table__header {
-  display: flex;
-  justify-content: space-around;
-  border-bottom: 1px solid grey;
 }
 .v-table__header p {
-  display: flex;
-  align-items: center;
-  text-align: left;
-  flex-basis: 25%;
-  cursor: pointer;
 }
 .v-table__pagination {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 30px;
 }
 .page {
-  padding: 8px;
-  margin: 5px;
-  border: solid 1px grey;
 }
 .page:hover {
-  background: #04b7f1;
 }
 .page-selected {
-  background: lightblue;
 }
 </style>
