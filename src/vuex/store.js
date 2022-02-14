@@ -6,12 +6,13 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
-        users: [],
+        items: [],
+        cart: [],
     },
     actions: {
         GET_DATA_FROM_API({commit}) {
             console.log('Получаем данные');
-            return axios('https://jsonplaceholder.typicode.com/users', {
+            return axios('https://fakestoreapi.com/products', {
                method: 'GET',
             })
                 .then((response) => {
@@ -19,16 +20,44 @@ const store = new Vuex.Store({
                     console.log('получили:', response.data)
                 })
         },
+        ADD_TO_CART({commit}, product) {
+            commit('SET_CART', product);
+        },
+        DELETE_FROM_CART({commit}, index) {
+            commit('REMOVE_FROM_CART', index)
+        }
     },
     mutations: {
-        SET_DATA_TO_VUEX: (state, users) => {
-            state.users = users
+        SET_DATA_TO_VUEX: (state, items) => {
+            state.items = items
+        },
+        SET_CART: (state, product) => {
+            if(state.cart.length) {
+                let isProductExists = false;
+                state.cart.map(function (item) {
+                    if (item.id === product.id) {
+                        isProductExists = true;
+                        item.quantity++
+                    }
+                });
+                if (!isProductExists) {
+                    state.cart.push(product)
+                }
+            } else {
+                state.cart.push(product)
+            }
+        },
+        REMOVE_FROM_CART: (state, index) => {
+            state.cart.splice(index, 1);
         }
     },
     getters: {
-        USERS(state) {
-            return state.users
-        }
+        ITEMS(state) {
+            return state.items
+        },
+        CART(state) {
+            return state.cart
+        },
     },
 });
 

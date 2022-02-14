@@ -1,15 +1,32 @@
+<template>
+  <div id="app">
+    <div class="container mx-auto">
+      <VCatalog
+          :items-data="ITEMS"
+      />
+      <VCart
+          v-if="CART.length"
+          :cart-data="CART"
+      />
+    </div>
+  </div>
+</template>
+
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import VTable from "./components/table/VTable";
+import VCatalog from "./components/VCatalog";
+import VCart from "./components/VCart";
 
 export default {
   name: 'App',
   components: {
-    VTable,
+    VCart,
+    VCatalog,
   },
   computed: {
     ...mapGetters([
-      'USERS'
+      'ITEMS',
+      'CART',
     ])
   },
   methods: {
@@ -23,20 +40,13 @@ export default {
 }
 </script>
 
-<template>
-  <div id="app">
-    <VTable
-      class="container mx-auto"
-      :users-data="USERS"
-    />
-  </div>
-</template>
-
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  margin-top: 60px;
+}
+.title {
+  @apply text-5xl font-bold text-center my-12;
 }
 </style>
