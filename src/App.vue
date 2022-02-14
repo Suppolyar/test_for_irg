@@ -25,7 +25,9 @@ export default {
 
 <template>
   <div id="app">
-    <VTable />
+    <VTable
+      :users-data="USERS"
+    />
   </div>
 </template>
 
