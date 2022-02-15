@@ -1,15 +1,15 @@
 <template>
   <div class="relative w-48 cursor-pointer text-left">
     <p
-        class="border p-2"
+        class="border rounded p-2 transition duration-300 hover:shadow-lg"
         @click="areOptionsVisible = !areOptionsVisible"
     >{{selected}}</p>
     <div
-        class="options"
+        class="options absolute bg-white top-8 rounded-b border"
         v-if="areOptionsVisible || isExpanded"
     >
       <p
-          class="m-0"
+          class="m-0  hover:bg-gray-100"
           v-for="option in options"
           :key="option.value"
           @click="selectOption(option)"
@@ -64,15 +64,10 @@ export default {
 
 <style>
 .options {
-  border: solid 1px #aeaeae;
-  background: #ffffff;
-  position: absolute;
   top: 30px;
   left: 0;
   width: 100%;
   padding: 8px;
 }
-.options p:hover {
-  background: #e7e7e7;
-}
+
 </style>

@@ -6,6 +6,7 @@
       </div>
       <div class="p-4 w-2/3">
         <h1 class="text-gray-900 font-bold text-2xl">{{ cartItemData.title }}</h1>
+        <p class="text-gray-600 font-bold text-sm mb-2">Rating {{ cartItemData.rating.rate }}</p>
         <p class="my-2 text-gray-600 text-sm">{{ cartItemData.description }}</p>
         <p class="text-gray-700 text-xl">
           Added:
@@ -15,6 +16,7 @@
         </p>
         <div class="flex item-center justify-between mt-3">
           <h1 class="text-gray-700 font-bold text-xl">{{ cartItemData.price }} $</h1>
+
           <button
               @click="deleteFromCart"
               class="px-3 py-2 bg-red-800 text-white text-xs font-bold uppercase rounded transition duration-300 hover:shadow-lg hover:bg-red-600">

@@ -5,6 +5,7 @@
         <img class="object-contain h-48 mx-auto" :src="itemData.image" alt="image">
       </div>
       <h1 class="text-gray-900 font-bold text-xl mb-2">{{ itemData.title }}</h1>
+      <p class="text-gray-600 font-bold text-sm mb-2">Rating {{ itemData.rating.rate }}</p>
       <p class="text-gray-600 text-sm mb-2">{{ itemData.description }}</p>
       <div class="flex item-center justify-between mt-auto">
         <h1 class="text-gray-700 font-bold text-xl">{{ itemData.price }} $</h1>
