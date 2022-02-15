@@ -1,10 +1,10 @@
 <template>
   <div class="py-6">
     <div class="sm:flex p-6 max-w-xl mx-auto bg-white transition duration-300 shadow-lg hover:shadow-2xl rounded-lg overflow-hidden">
-      <div class="mx-auto w-1/3 flex flex-col justify-center">
+      <div class="mx-auto sm:w-1/3 flex flex-col justify-center">
         <img class="object-contain h-48 mx-auto" :src="cartItemData.image" alt="image">
       </div>
-      <div class="p-4 w-2/3">
+      <div class="p-4 sm:w-2/3">
         <h1 class="text-gray-900 font-bold text-2xl">{{ cartItemData.title }}</h1>
         <p class="text-gray-600 font-bold text-sm mb-2">Rating {{ cartItemData.rating.rate }}</p>
         <p class="my-2 text-gray-600 text-sm">{{ cartItemData.description }}</p>

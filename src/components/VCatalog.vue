@@ -126,10 +126,8 @@ export default {
       if (this.sortPriceFlag) {
         this.filteredItems.sort((a, b) => a.price - b.price);
         this.sortPriceFlag = false
-        console.log('отфильтровали по увеличению')
       } else {
         this.filteredItems.sort((a, b) => b.price - a.price)
-        console.log('отфильтровали по уменьшению')
         this.sortPriceFlag = true
       }
     },
@@ -137,10 +135,8 @@ export default {
       if (this.sortRatingFlag) {
         this.filteredItems.sort((a, b) => a.rating.rate - b.rating.rate);
         this.sortRatingFlag = false
-        console.log('отфильтровали по увеличению')
       } else {
         this.filteredItems.sort((a, b) => b.rating.rate - a.rating.rate)
-        console.log('отфильтровали по уменьшению')
         this.sortRatingFlag = true
       }
     },

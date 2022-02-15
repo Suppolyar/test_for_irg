@@ -11,13 +11,11 @@ const store = new Vuex.Store({
     },
     actions: {
         GET_DATA_FROM_API({commit}) {
-            console.log('Получаем данные');
             return axios('https://fakestoreapi.com/products', {
                method: 'GET',
             })
                 .then((response) => {
                     commit('SET_DATA_TO_VUEX', response.data)
-                    console.log('получили:', response.data)
                 })
         },
         ADD_TO_CART({commit}, product) {
