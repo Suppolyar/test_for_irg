@@ -49,9 +49,6 @@ export default {
       }
     }
   },
-  mounted() {
-    this.$set(this.cartItemData, 'quantity', 1)
-  }
 }
 </script>
 

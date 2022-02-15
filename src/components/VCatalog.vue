@@ -1,37 +1,38 @@
 <template>
   <div>
-    <h1 class="title">Каталог</h1>
+    <router-link :to="{name: 'cart', params: {cartData: CART}}">
+      <div class="absolute top-2 right-2 px-4 py-2 border rounded transition duration-300 hover:bg-gray-600 bg-gray-800 text-white">Cart: {{ CART.length }}</div>
+    </router-link>
+    <h1 class="title">Catalog</h1>
+    <div class="mb-4">
+      <div class="text-gray-900 font-bold text-xl mb-2">Select a category</div>
+      <VSelect
+          :selected="selected"
+          :options="categories"
+          @select="sortByCategories"
+      />
+    </div>
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
       <VCatalogItem
         class=" border-none hover:border rounded"
-        v-for="(item, index) in paginatedUsers"
+        v-for="item in filteredItems"
         :key="item.id"
         :item-data="item"
         @addToCart="addToCart"
-        @deleteFromCart="deleteFromCart(index)"
       />
-    </div>
-    <div class="flex flex-row justify-center mt-16">
-      <div
-          class="p-2 mx-1 cursor-pointer border rounded transition duration-300 hover:bg-gray-600 hover:text-white"
-          v-for="page in pages"
-          :key="page"
-          :class="{'bg-gray-800 text-white': page === pageNumber}"
-          @click="pageClick(page)"
-      >
-        {{ page }}
-      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import VCatalogItem from "./VCatalogItem";
+import VSelect from "./UI/VSelect";
 export default {
   name: "VCatalog",
   components: {
     VCatalogItem,
+    VSelect,
   },
   props: {
     itemsData: {
@@ -43,34 +44,66 @@ export default {
   },
   data() {
     return {
-      itemsPerPage: 6,
-      pageNumber: 1,
+      categories: [
+        {
+          name: "All",
+          value: "All"
+        },
+        {
+          name: "men's clothing",
+          value: "men's clothing"
+        },
+        {
+          name: "jewelery",
+          value: "jewelery"
+        },
+        {
+          name: "electronics",
+          value: "electronics"
+        },
+        {
+          name: "women's clothing",
+          value: "women's clothing"
+        },
+      ],
+      selected: "All",
+      sortedItems: [],
     }
   },
   computed: {
-    pages() {
-      return Math.ceil(this.itemsData.length / 5);
-    },
-    paginatedUsers() {
-      let from = (this.pageNumber - 1) * this.itemsPerPage;
-      let to = from + this.itemsPerPage;
-      return this.itemsData.slice(from, to);
+    ...mapGetters([
+        "ITEMS",
+        "CART",
+    ]),
+    filteredItems() {
+      if (this.sortedItems.length) {
+        return this.sortedItems
+      } else {
+        return this.ITEMS
+      }
     },
   },
   methods: {
     ...mapActions([
+      'GET_DATA_FROM_API',
       'ADD_TO_CART',
-      'DELETE_FROM_CART',
     ]),
-    pageClick(page) {
-      this.pageNumber = page;
+    sortByCategories(category) {
+      this.sortedItems = [];
+      let that = this;
+      this.ITEMS.map(function (item) {
+        if (item.category === category.name) {
+          that.sortedItems.push(item)
+        }
+      })
+      this.selected = category.name;
     },
     addToCart(data) {
       this.ADD_TO_CART(data)
     },
-    deleteFromCart(index) {
-      this.DELETE_FROM_CART(index)
-    }
+  },
+  mounted() {
+    this.GET_DATA_FROM_API()
   }
 }
 </script>

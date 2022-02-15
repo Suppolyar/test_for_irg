@@ -1,42 +1,17 @@
 <template>
   <div id="app">
-    <div class="container mx-auto">
-      <VCatalog
-          :items-data="ITEMS"
-      />
-      <VCart
-          v-if="CART.length"
-          :cart-data="CART"
-      />
+    <div class="container mx-auto my-8">
+      <VWrapper />
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
-import VCatalog from "./components/VCatalog";
-import VCart from "./components/VCart";
-
+import VWrapper from "./components/VWrapper";
 export default {
   name: 'App',
-  components: {
-    VCart,
-    VCatalog,
-  },
-  computed: {
-    ...mapGetters([
-      'ITEMS',
-      'CART',
-    ])
-  },
-  methods: {
-    ...mapActions([
-      'GET_DATA_FROM_API'
-    ]),
-  },
-  mounted() {
-    this.GET_DATA_FROM_API()
-  }
+  components: {VWrapper},
+
 }
 </script>
 

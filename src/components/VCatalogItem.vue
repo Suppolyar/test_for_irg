@@ -39,6 +39,9 @@ export default {
       this.$emit('deleteFromCart')
     },
   },
+  mounted() {
+    this.$set(this.itemData, 'quantity', 1)
+  }
 }
 </script>
 
